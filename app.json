@@ -1,10 +1,11 @@
 {
   "expo": {
-    "name": "easyAndroidApp",
-    "slug": "easyAndroidApp",
+    "name": "Калькулятор. Физика",
+    "description": "Калькулятор быстрого расчёта с применением физикки",
+    "slug": "physicsCalculatorApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/atom.png",
     "scheme": "easyandroidapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -14,10 +15,10 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#f5f5f5"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.nikitaguriev.easyAndroidApp"
+      "package": "com.nikitaguriev.physicsCalculatorApp"
     },
     "web": {
       "bundler": "metro",
@@ -29,10 +30,10 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/splash-screen.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#f5f5f5"
         }
       ]
     ],
@@ -44,6 +45,7 @@
       "eas": {
         "projectId": "0dc0ca1e-ebcf-46ca-aef8-cf969415adc5"
       }
-    }
+    },
+    "primaryColor": "#673AB7"
   }
 }
