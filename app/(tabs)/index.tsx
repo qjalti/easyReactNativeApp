@@ -1,5 +1,5 @@
-import {StyleSheet, TextInput} from 'react-native';
-import {useState} from 'react';
+import {StyleSheet, TextInput, Button, ScrollView} from 'react-native';
+import {useState, useEffect} from 'react';
 
 import {ThemedText} from '@/components/ThemedText';
 import {ThemedView} from '@/components/ThemedView';
@@ -9,6 +9,11 @@ export default function HomeScreen() {
     const [meteorsPerSecond, setMPS] = useState('0');
     const [depth, setDepth] = useState('0');
     const [distanceToLightning, setDTL] = useState('0');
+    const [a, setA] = useState('');
+    const [b, setB] = useState('');
+    const [c, setC] = useState('');
+    const [x, setX] = useState('');
+    const [history, setHistory] = useState<string[]>([]);
 
     const calculateMeteorsPerHour = (value: string) => {
         let meteorsPerHour = value;
@@ -45,8 +50,82 @@ export default function HomeScreen() {
         }
     }
 
+    const calculateX = () => {
+        const numA = parseFloat(a);
+        const numB = parseFloat(b);
+        const numC = parseFloat(c);
+
+        if (!numA || !numB || !numC) return;
+
+        const result = ((numB * numC) / numA).toFixed(0);
+        setX(result);
+
+        setHistory(prev => {
+            const updated = [result, ...prev];
+            return updated.slice(0, 10);
+        });
+    };
+
+    const resetXCalc = () => {
+        setA('');
+        setB('');
+        setC('');
+        setX('');
+    };
+
     return (
-        <>
+        <ScrollView>
+            <ThemedView style={styles.stepContainer}>
+                <ThemedText type={'subtitle'}>Вычисление X</ThemedText>
+                <ThemedView style={styles.xContainer}>
+                    <ThemedView style={styles.calcXInputs}>
+                        <TextInput
+                            value={a}
+                            onChangeText={setA}
+                            placeholder={'A'}
+                            keyboardType={'numeric'}
+                            style={styles.input}
+                        />
+                        <TextInput
+                            value={b}
+                            onChangeText={setB}
+                            placeholder={'C'}
+                            keyboardType={'numeric'}
+                            style={styles.input}
+                        />
+                    </ThemedView>
+                    <ThemedView style={styles.calcXInputs}>
+                        <TextInput
+                            value={c}
+                            onChangeText={setC}
+                            placeholder={'B'}
+                            keyboardType={'numeric'}
+                            style={styles.input}
+                        />
+                        <TextInput
+                            value={x}
+                            placeholder={'X'}
+                            editable={false}
+                            style={styles.input}
+                        />
+                    </ThemedView>
+                </ThemedView>
+                <Button
+                    title={'Рассчитать'}
+                    onPress={calculateX}
+                    color={'#673ab7'}
+                />
+                <Button
+                    title={'Сброс'}
+                    onPress={resetXCalc}
+                    color={'#f44336'}
+                />
+
+                <ThemedText type={'subtitle'}>История X</ThemedText>
+                {history.map((item, index) => (
+                    <ThemedText key={index}>{index + 1}. {item}</ThemedText>
+                ))}
+            </ThemedView>
             <ThemedView style={styles.stepContainer}>
                 <ThemedText
                     type={'subtitle'}
@@ -84,7 +163,7 @@ export default function HomeScreen() {
                     Глубина: {depth}m
                 </ThemedText>
             </ThemedView>
-            <ThemedView style={styles.stepContainer}>
+            <ThemedView style={styles.lastStepContainer}>
                 <ThemedText
                     type={'subtitle'}
                 >
@@ -101,7 +180,7 @@ export default function HomeScreen() {
                     Растояние до молнии: {distanceToLightning}m
                 </ThemedText>
             </ThemedView>
-        </>
+        </ScrollView>
     );
 }
 
@@ -115,4 +194,29 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         boxShadow: '0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12)'
     },
+    xContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        padding: 8,
+        margin: 4,
+    },
+    calcXInputs: {
+        flex: 1,
+        alignItems: 'flex-start',
+    },
+    input: {
+        padding: 8,
+        marginBottom: 8,
+        width: '90%',
+    },
+    lastStepContainer: {
+        gap: 8,
+        marginTop: 16,
+        marginLeft: 16,
+        marginRight: 16,
+        padding: 16,
+        borderRadius: 16,
+        boxShadow: '0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12)',
+        marginBottom: 8 * 2,
+    }
 });

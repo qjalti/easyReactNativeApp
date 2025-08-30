@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Калькулятор. Физика",
-    "description": "Калькулятор быстрого расчёта с применением физикки",
-    "slug": "physicsCalculatorApp",
+    "name": "Калькулятор Кьялти",
+    "description": "Калькулятор быстрого расчёта с применением физики",
+    "slug": "easyAndroidApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/atom.png",
