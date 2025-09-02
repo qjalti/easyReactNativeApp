@@ -1,5 +1,5 @@
 import {StyleSheet, TextInput, Button, ScrollView} from 'react-native';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 
 import {ThemedText} from '@/components/ThemedText';
 import {ThemedView} from '@/components/ThemedView';
@@ -23,8 +23,8 @@ export default function HomeScreen() {
             }
             const METEORS_PER_SECOND = (3600 / Number(meteorsPerHour)).toFixed(2);
             const METEORS_PER_MINUTE = (60 / Number(meteorsPerHour)).toFixed(2);
-            setMPM(METEORS_PER_MINUTE);
-            setMPS(METEORS_PER_SECOND);
+            setMPM(new Intl.NumberFormat('ru-RU').format(Number(METEORS_PER_MINUTE)).replace(',', '.'));
+            setMPS(new Intl.NumberFormat('ru-RU').format(Number(METEORS_PER_SECOND)).replace(',', '.'));
         }
     }
 
@@ -35,7 +35,7 @@ export default function HomeScreen() {
                 fallTime = value.replace(',', '.');
             }
             const DEPTH = (9.81 * Math.pow(Number(fallTime), 2) / 2).toFixed(2);
-            setDepth(DEPTH);
+            setDepth(new Intl.NumberFormat('ru-RU').format(Number(DEPTH)).replace(',', '.'));
         }
     }
 
@@ -46,7 +46,7 @@ export default function HomeScreen() {
                 timing = value.replace(',', '.');
             }
             const DISTANCE_TO_LIGHTNING = (334 * Number(timing)).toFixed(2);
-            setDTL(DISTANCE_TO_LIGHTNING);
+            setDTL(new Intl.NumberFormat('ru-RU').format(Number(DISTANCE_TO_LIGHTNING)).replace(',', '.'));
         }
     }
 
@@ -57,11 +57,12 @@ export default function HomeScreen() {
 
         if (!numA || !numB || !numC) return;
 
-        const result = ((numB * numC) / numA).toFixed(0);
+        const result = ((numB * numC) / numA).toFixed(2);
+        const formattedResult = new Intl.NumberFormat('ru-RU').format(Number(result)).replace(',', '.');
         setX(result);
 
         setHistory(prev => {
-            const updated = [result, ...prev];
+            const updated = [formattedResult, ...prev];
             return updated.slice(0, 10);
         });
     };
