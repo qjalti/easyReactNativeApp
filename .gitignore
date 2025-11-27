@@ -39,3 +39,14 @@ yarn-error.*
 app-example
 
 .idea
+
+# Android
+/android/app/build/
+/android/.gradle/
+/android/build/
+/android/*.apk
+/android/*.aab
+/android/captures/
+/android/gradlew
+/android/gradlew.bat
+/android/gradle/wrapper/gradle-wrapper.jar
