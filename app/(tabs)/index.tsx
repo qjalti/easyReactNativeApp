@@ -1,4 +1,10 @@
-import {StyleSheet, TextInput, Button, ScrollView} from 'react-native';
+import {
+    StyleSheet,
+    TextInput,
+    Button,
+    ScrollView,
+    useColorScheme
+} from 'react-native';
 import {useState} from 'react';
 
 import {ThemedText} from '@/components/ThemedText';
@@ -14,6 +20,14 @@ export default function HomeScreen() {
     const [c, setC] = useState('');
     const [x, setX] = useState('');
     const [history, setHistory] = useState<string[]>([]);
+
+    const colorScheme = useColorScheme();
+    const inputTextColor = colorScheme === 'dark' ?
+        'rgba(250, 250, 250, 0.875)' :
+        'rgba(18, 18, 18, 0.875)';
+    const placeholderColor = colorScheme === 'dark' ?
+        'rgba(238, 238, 238, 0.875)' :
+        'rgba(66, 66, 66, 0.875)';
 
     const calculateMeteorsPerHour = (value: string) => {
         let meteorsPerHour = value;
@@ -85,14 +99,16 @@ export default function HomeScreen() {
                             onChangeText={setA}
                             placeholder={'A'}
                             keyboardType={'numeric'}
-                            style={styles.input}
+                            placeholderTextColor={placeholderColor}
+                            style={[styles.input, {color: inputTextColor}]}
                         />
                         <TextInput
                             value={b}
                             onChangeText={setB}
                             placeholder={'C'}
                             keyboardType={'numeric'}
-                            style={styles.input}
+                            placeholderTextColor={placeholderColor}
+                            style={[styles.input, {color: inputTextColor}]}
                         />
                     </ThemedView>
                     <ThemedView style={styles.calcXInputs}>
@@ -101,25 +117,27 @@ export default function HomeScreen() {
                             onChangeText={setC}
                             placeholder={'B'}
                             keyboardType={'numeric'}
-                            style={styles.input}
+                            placeholderTextColor={placeholderColor}
+                            style={[styles.input, {color: inputTextColor}]}
                         />
                         <TextInput
                             value={x}
                             placeholder={'X'}
                             editable={false}
-                            style={styles.input}
+                            placeholderTextColor={placeholderColor}
+                            style={[styles.input, {color: inputTextColor}]}
                         />
                     </ThemedView>
                 </ThemedView>
                 <Button
                     title={'Рассчитать'}
                     onPress={calculateX}
-                    color={'#673ab7'}
+                    color={'rgba(103, 58, 183, 0.875)'}
                 />
                 <Button
                     title={'Сброс'}
                     onPress={resetXCalc}
-                    color={'#f44336'}
+                    color={'rgba(244, 67, 54, 0.875)'}
                 />
 
                 <ThemedText type={'subtitle'}>История X</ThemedText>
@@ -139,6 +157,8 @@ export default function HomeScreen() {
                     inputMode={'numeric'}
                     keyboardType={'numeric'}
                     placeholder={'Метеоров в час'}
+                    placeholderTextColor={placeholderColor}
+                    style={{color: inputTextColor}}
                 />
                 <ThemedText>
                     1 метеор каждые: {meteorsPerSecond}s
@@ -159,6 +179,8 @@ export default function HomeScreen() {
                     inputMode={'numeric'}
                     keyboardType={'numeric'}
                     placeholder={'Время падения в секундах'}
+                    placeholderTextColor={placeholderColor}
+                    style={{color: inputTextColor}}
                 />
                 <ThemedText>
                     Глубина: {depth}m
@@ -176,6 +198,8 @@ export default function HomeScreen() {
                     inputMode={'numeric'}
                     keyboardType={'numeric'}
                     placeholder={'Время в секундах от вспышки до грома'}
+                    placeholderTextColor={placeholderColor}
+                    style={{color: inputTextColor}}
                 />
                 <ThemedText>
                     Растояние до молнии: {distanceToLightning}m
