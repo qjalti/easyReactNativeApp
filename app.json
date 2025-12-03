@@ -15,7 +15,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#f5f5f5"
+        "backgroundColor": "#25151C"
       },
       "edgeToEdgeEnabled": true,
       "package": "com.nikitaguriev.physicsCalculatorApp"
@@ -33,7 +33,7 @@
           "image": "./assets/images/splash-screen.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#f5f5f5"
+          "backgroundColor": "#25151C"
         }
       ]
     ],
@@ -46,6 +46,6 @@
         "projectId": "0dc0ca1e-ebcf-46ca-aef8-cf969415adc5"
       }
     },
-    "primaryColor": "#673AB7"
+    "primaryColor": "#f43688"
   }
 }
